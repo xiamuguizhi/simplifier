@@ -18,6 +18,7 @@ simplifier-typecho主题（极简）
 ## 版权
 
 评论样式：提取自 Quark 极简风格主题 
+
 主题作者：https://simplifier.neocities.org/
 
 ## 友情链接
