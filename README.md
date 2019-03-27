@@ -44,6 +44,6 @@ simplifier-typecho主题（极简）
         </tr>
     </table>    
 ```	
-##图片预览
+## 图片预览
 
 ![image](https://wx3.sinaimg.cn/large/006eY07Igy1g1hb5js6v2j31hk1ma0xe.jpg)
