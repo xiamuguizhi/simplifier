@@ -11,6 +11,8 @@ simplifier-typecho主题（极简）
 
 使用前 请到/usr/uploads/新建文件夹avatar 并设置777权限！（头像缓存功能）
 
+网站底部联系邮箱，请到主题设置界面添加
+
 ## 演示
 
 夏目友人帐https://xiamuyourenzhang.cn/
