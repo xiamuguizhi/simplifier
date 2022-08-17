@@ -15,9 +15,9 @@ simplifier-typecho主题（极简）
 
 ## 演示
 
-~~~夏目友人帐https://xiamuyourenzhang.cn/~~~
+夏目友人帐https://xiamuyourenzhang.cn/  失效
 
-搞机男 ： https://www.gaojinan.com/
+搞机男 ： https://www.gaojinan.com/  正常
 
 ## 版权
 
