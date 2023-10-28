@@ -32,7 +32,6 @@ function threadedComments($comments, $options) {
 .cf{margin:1rem 0 3rem 0}
 .cf .page-navigator{margin:3.75rem 0 3rem 0}
 .response{margin:2rem 0}
-.hinfo{display:none}
 .cf a{color:#aaa}
 .comment-list{padding-left:0;list-style-type:none;margin:0}
 .avatar{display:block;float:left;width:40px;height:40px;margin:1.4rem 1rem 0 0;border-radius:50%}
@@ -53,6 +52,21 @@ textarea.ci{padding-top:8px;height:10rem;resize:none}
 .submit:hover{color:#000;border-color:#ddd;background:#ddd;cursor:pointer}
 @media only screen and (max-width:767px){.c_p .children{margin-left:0;padding-left:0}}
 </style>
+
+ <script>
+    function tg_c(showId, hideId) {
+    var showElement = document.getElementById(showId);
+    var hideElement = document.getElementById(hideId);
+    if (showElement.style.display === 'none') {
+      showElement.style.display = 'inline';
+      hideElement.style.display = 'none';
+    } else {
+      showElement.style.display = 'none';
+      hideElement.style.display = 'inline';
+    }
+  }
+  </script>
+
 <div id="comments" class="cf">
 <?php $this->comments()->to($comments); ?>
 <?php if ($comments->have()): ?>
@@ -68,7 +82,7 @@ textarea.ci{padding-top:8px;height:10rem;resize:none}
 <?php else: ?>
     <?php if($this->remember('author',true) != "" && $this->remember('mail',true) != "") : ?>
         <span>欢迎【<?php $this->remember('author'); ?>】的归来 | <small style="cursor: pointer;" onclick = "tg_c('ainfo','hinfo');"> 编辑资料</small></span>
-        <div id ="ainfo" class="ainfo hinfo">
+          <div id ="ainfo" class="ainfo hinfo"style="display: none;">
     <?php else : ?>
         <div class="ainfo">
         <?php endif ; ?>
