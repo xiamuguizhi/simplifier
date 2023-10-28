@@ -34,42 +34,58 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  <body name="top">
  <tt>
  <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title() ?></a>.
- <hr>
-         <?php $this->widget('Widget_Contents_Page_List')
-                       ->parse('{day}/{month}/{year} <a href="{permalink}" >{title}</a><br>'); ?>
+ <hr> 
+ 
+         分类:<?php $this->widget('Widget_Metas_Category_List')
+                       ->parse(' <a href="{permalink}" >{name}({count})</a>'); ?>
  <hr>
  
-<?php if(($this->is('index'))||($this->is('archive'))): ?><!-- 判断① 判断是否首页或者是archive 通用（分类、搜索、标签、作者）页面文件  只要是其中一个 输出文章 不是则继续循环-->
+<?php 
+if ($this->is('index')) {
+    // 判断① 判断是否首页
+    // 输出文章列表
+    $this->widget('Widget_Contents_Post_Recent', 'pageSize=10000')->parse('{year}/{month}/{day} <a href="{permalink}">{title}</a><br>');
+} else {
+    // 不是首页
+    if ($this->is('category')) {
+        // 判断是否分类页面
+        // 输出分类列表
+    
+        $this->widget('Widget_Archive@index', 'pageSize=10000&type=category', 'mid='.getCategeId($this->getArchiveSlug()))->parse('{year}/{month}/{day} <a href="{permalink}">{title}</a><br>');
+    } elseif (($this->is('post')) || ($this->is('page'))) {
+        // 判断是否文章页或者是独立页面
+        // 输出文章标题和内容
+        ?>
+        <article>
+            <h1><?php $this->title() ?></h1>
+            <p><?php $this->content('Continue Reading...'); ?></p>
+            <?php 
+            if (isset($this->fields->author) || ($this->fields->url)) {
+                echo '<blockquote>'; 
+                echo '<p>文章作者：'.$this->fields->author . '</p>';  
+                echo '<p>原文链接：'.$this->fields->url . '</p>';
+                echo '<p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>';
+                echo '<blockquote>'; 
+            } else {
+                // 其他情况的处理
+            }
+            ?>
+        </article>
 
-	<?php $this->widget('Widget_Contents_Post_Recent', 'pageSize=10000')->parse('{year}/{month}/{day} <a href="{permalink}">{title}</a><br>'); ?><!--输出1w篇文章/后输出发布时间;标题文章链接-->
-		
-	<?php else: ?><!--不是首页继续循环判断-->
-	
-	<?php if(($this->is('post'))||($this->is('page'))): ?><!--判断② 判断是否文章页或者是独立页面  只要是其中一个 输出文章 不是则继续循环-->
-	
-	<article><!--是文章页面 输出文章标题和内容-->
-	<h2><?php $this->title() ?></h2>
-	<p> <?php $this->content('Continue Reading...'); ?></p>
-		<?php 
-	if(isset($this->fields->author)||($this->fields->url)){
-		  echo '<blockquote>'; 
-		  echo '<p>文章作者：'.$this->fields->author . '</p>';  
-		  echo '<p>原文链接：'.$this->fields->url . '</p>';
-		  echo '<p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>';
-		  echo '</blockquote>'; 
-	}else{
-	}
-	?>
-	</article>
 
-		<hr/>
-	<?php $this->need('comments.php'); ?><!--加载评论-->
+ <?php if ($this->is('post')) { ?>
+ 分类:<?php $this->category(',', true, 'none'); ?><br>
+<?php } ?>
 
-	<?php endif; ?><!-- 判断②判断结束 -->
 
-<?php endif; ?><!-- 判断① 结束 --> 
+        <hr/>
+        <?php $this->need('comments.php'); ?>
+        <?php
+    }
+} 
+?>
+<hr>
  
- <hr>
  最后更新于 <?php echo date('Y 年 m 月 d 日', $this->modified);?>.<br>
  Contact me at <?php $this->options->email(); ?>.
  <a href="javascript:window.scrollTo( 0, 0 );" target="_self" id="top">回到顶部</a>
