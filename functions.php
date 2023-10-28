@@ -12,3 +12,10 @@ function themeConfig($form) { // 网站底部联系邮箱
     $email = new Typecho_Widget_Helper_Form_Element_Text('email', NULL, NULL, _t('电子邮件地址'), _t('在这里填入你的联系邮箱'));
     $form->addInput($email);
 }
+
+function getCategeId($slug) //根据分类的slug获取分类的ID
+{
+    $db = Typecho_Db::get();
+    $CategeId = $db->fetchRow($db->select()->from('table.metas')->where('slug=?', $slug)->where('type=?', 'category'));
+    return $CategeId['mid'];
+}
