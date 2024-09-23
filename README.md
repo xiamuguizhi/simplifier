@@ -19,8 +19,6 @@ simplifier-typecho主题（极简）
 
 搞机男 ： https://www.gaojinan.com/  正常
 
-Yixiao.Org https://yixiao.org/   正常
-
 ## 版权
 
 评论样式：提取自 Quark 极简风格主题 
